@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'GitHubID', url: 'https://github.com/PratikshaKun10/CI-CD-pipeline-for-Simple-Web-Application.git'
+                git branch: 'main', credentialsId: 'GitHubID', url: 'https://github.com/PratikshaKun10/CI-CD-pipeline-for-Simple-Web-Application.git'
             }
         }
         stage('Build') {
