@@ -1,27 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'GitHubID', url: 'https://github.com/PratikshaKun10/CI-CD-pipeline-for-Simple-Web-Application.git'
+                git 'https://github.com/PratikshaKun10/CI-CD-pipeline-for-Simple-Web-Application.git'
             }
         }
         stage('Build') {
             steps {
-                // Add your build steps here
-                echo 'Building...'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                // Add your test steps here
-                echo 'Testing...'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
-                // Add your deploy steps here
-                echo 'Deploying...'
+                sh 'docker build -t your-app .'
+                sh 'docker run -d -p 8080:8080 your-app'
             }
         }
     }
